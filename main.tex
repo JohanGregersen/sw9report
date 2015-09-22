@@ -1,0 +1,66 @@
+\input{Settings/preamble}
+\begin{document}
+
+\include{Formalia/forside}
+\cleardoublepage
+
+\frontmatter
+\include{Formalia/titlepage}
+\cleardoublepage
+
+
+% De vigtigste forskelle mellem \include og \input ligger i at
+% \include kun må findes EFTER preamblen og at 
+% inkluderede filer kan fravælges ved generering af output
+% ved brug sammen med \includeonly.
+
+% Se arbejdsblad-skabelon.tex for et eksempel herpå.
+
+\include{Formalia/preface}
+\include{Formalia/readingguide}
+
+% For at sikre sideskift efter forord. Denne kommando bør kun bruges i
+% absolutte undtagelsestilfælde.
+
+\newpage
+\mainmatter
+\tableofcontents*
+\newpage
+
+% % % % New stuff % % % % % % % 
+% Main parts of report
+
+\listoffixmes
+
+%Introduction chapter%
+\include{Content/introduction}
+
+%Backend chapter%
+\include{Content/backend}
+
+%Frontend chapter%
+\include{Content/frontend}
+
+%Test chapter%
+\include{Content/test}
+
+%conclusion chapter%
+\include{Content/conclusion}
+
+%INSERT REPORT HERE%
+%INSERT REPORT HERE%
+
+% % % % % % % % % % % % % % % %
+
+\bibliographystyle{chicago}
+\bibliography{Litterature/litteratur}
+
+
+% Appendices
+% \begin{appendices}
+% \end{appendices}
+
+
+
+\label{LastPage}
+\end{document}
