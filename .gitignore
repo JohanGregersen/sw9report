@@ -1,6 +1,8 @@
 *.aux
-main.synctex.gz
+*.synctex.gz
+*.out
+*.lox
+*.toc
+*.bbl
+*.blg
 main.pdf
-main.out
-main.lox
-main.toc

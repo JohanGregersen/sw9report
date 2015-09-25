@@ -1,6 +1,16 @@
 \chapter{Introduction}
 \label{chap:intro}
 
-Small introduction
+Car insurance has traditionally been based on the facts available at the time of purchase. Insurance companies will usually require detailed information about you and your car, creating an offer based on that. Coupled with historical statistics, an insurance company can make reasonable predictions about risks associated with insuring your car. For example, statistics often show young drivers being involved in more accidents compared to others\cite{accidents}.
+
+Basing insurance on such loose prediction criteria is unfair for the individual policy holder. The generalization that young people are bad drivers means that even those who drive very well, have to pay extra because of those who do not. The problem is not unrecognized, and it is also being addressed by both insurance companies and researchers (See \ref{sec:RelatedWork}).
+
+To make insurance fairer, it makes sense to look at individuals rather than segmented groups. If risk prediction could be calculated based on the use of individual cars, that also means the policy holder could receive a fair price offer. This type of insurance is known as Usage Based Insurance (UBI), and a few insurance companies is already offering it as a product. By example, the American company \texttt{Progressive} sells UBI in select states under the name \texttt{Snapshot}\cite{snapshot}. The insurance depends on their own device mounted in your cars OBD-II port, which then measures how much you drive, number of hard braking events and more.
+
+A common factor for any UBI system is the requirement for certain hardware in insured cars. The insurance company needs data, which the device must provide. The data is usually sent directly from the device to the insurance company, which is also the case in Progressive's example. This model can however be a concern for the policy holder. The data can be inaccessible, since it is sent directly to the insurance company. It then depends on the insurance company which data the policy holder can see, and it might not be possible to verify if you are being billed correctly. Furthermore, it is not transparent which data the insurance company actually has on your car. In Progressive's example it can be read from their FAQ that "some devices collect location data", which may be a privacy concern, especially given that the data can not be accessed.
+
+In this paper we suggest how to alleviate concerns of the policy holder, while still maintaining a model that works for the insurance company. We look into which data is needed by the insurance company, and how it can be sent to them without being able to track policy holders too closely. We also present an array of metrics, made possible through collected vehicle data, and provide intuitive ways to visualize them for the policy holder.
+
+The main challenges in achieving these goals lies in data management, both for supporting different metrics, but also for privacy-friendly alteration. Data presentation is also a significant challenge, as raw log data will have to be displayed in a way that the policy holder can relate and understand.
 
 \input{Content/Introduction/relatedwork}
