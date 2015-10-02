@@ -1,66 +1,60 @@
-\input{Settings/preamble}
+
+%\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out
+                                                          % if you need a4paper
+\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
+                                                          % paper
+
+% \IEEEoverridecommandlockouts                              % This command is only
+                                                          % needed if you want to
+                                                          % use the \thanks command
+% \overrideIEEEmargins
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+\title{\LARGE \bf
+Totally Awesome Title That Will Totally Look Good Even Though It is Long
+}
+
+
+\author{Morten Jakobsen, Casper Laustsen and Johan Gregersen% <-this % stops a space
+\thanks{*This work was not supported by any organization}% <-this % stops a space
+\thanks{*The Department of Computer S, Aalborg University}%
+}
+
+
 \begin{document}
 
-\include{Formalia/forside}
-\cleardoublepage
-
-\frontmatter
-\include{Formalia/titlepage}
-\cleardoublepage
 
 
-% De vigtigste forskelle mellem \include og \input ligger i at
-% \include kun må findes EFTER preamblen og at 
-% inkluderede filer kan fravælges ved generering af output
-% ved brug sammen med \includeonly.
-
-% Se arbejdsblad-skabelon.tex for et eksempel herpå.
-
-\include{Formalia/preface}
-\include{Formalia/readingguide}
-
-% For at sikre sideskift efter forord. Denne kommando bør kun bruges i
-% absolutte undtagelsestilfælde.
-
-\newpage
-\mainmatter
-\tableofcontents*
-\newpage
-
-% % % % New stuff % % % % % % % 
-% Main parts of report
-
-\listoffixmes
-
-%Introduction chapter%
-\include{Content/introduction}
-
-%Backend chapter%
-\include{Content/datamanagement}
-
-%Frontend chapter%
-\include{Content/application}
-
-%Test chapter%
-\include{Content/test}
-
-%conclusion chapter%
-\include{Content/conclusion}
-
-%INSERT REPORT HERE%
-%INSERT REPORT HERE%
-
-% % % % % % % % % % % % % % % %
-
-\bibliographystyle{chicago}
-\bibliography{Litterature/litteratur}
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
 
 
-% Appendices
-% \begin{appendices}
-% \end{appendices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Content/Abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{Content/Introduction/Introduction}
+
+\input{Content/Procedure/Procedure}
+
+\input{Content/Mathematics/Mathematics}
+
+\input{Content/Template/Template}
+
+\input{Content/Conclusion/Conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Appendix/Appendix}
+
+\input{Acknowledgement/Acknowledgement}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\label{LastPage}
+\input{References/References}
+
 \end{document}
