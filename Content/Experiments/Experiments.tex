@@ -1,7 +1,96 @@
 \section{EXPERIMENTS}\label{sec:expe}
+To demonstrate possible effects of the system, a policy was created using parameters and variables found reasonable by the authors. These are what the insurance company would have to decide on as well. The chosen parameters and values can be seen in tables \ref{tab:roadtypevalues}, \ref{tab:crittimevalues}, \ref{tab:speedingvalues}, \ref{tab:accelerationvalues}, \ref{tab:basevalues}, and \ref{tab:polyvalues}. 
 
-Before you begin to format your paper, first write and save the content as a separate text file. Keep your text and graphic files separate until after the text has been formatted and styled. Do not use hard tabs, and limit use of hard returns to only one return at the end of a paragraph. Do not add any kind of pagination anywhere in the paper. Do not number text heads-the template will do that for you.
+To test this policy, and thereby the developed system, trips were handpicked from the INFATI dataset. This was done on the following criteria:
 
-Finally, complete content and organizational editing before formatting. Please take note of the following items when proofreading spelling and grammar:
+\begin{itemize}
+  \item Trips should follow similar routes
+  \item Trips should be similar in distance
+  \item Trips should display different driving styles
+\end{itemize}
 
-\subsection{QGIS examples and shiet} Define abbreviations and acronyms the first time they are used in the text, even after they have been defined in the abstract. Abbreviations such as IEEE, SI, MKS, CGS, sc, dc, and rms do not have to be defined. Do not use abbreviations in the title or heads unless they are unavoidable.
+From these criteria, two different test cases were picked. The trips are visualized in BLA FLERE FIGURER!!!
+
+\begin{table}
+    \begin{tabular}{ll}
+    \textbf{Roadtype} & \textbf{Weight} \\ \hline
+    Motorway          & 1               \\
+    Trunk             & 1               \\
+    Primary           & 1               \\
+    Secondary         & 1.05            \\
+    Tertiary          & 1.1             \\
+    Unclassified      & 1.1             \\
+    Residential       & 1.2             \\
+    Service           & 1.2             \\ \hline
+    \end{tabular}
+    \caption{Roadtypes with weights}
+    \label{tab:roadtypevalues}
+\end{table}
+
+\begin{table}
+    \begin{tabular}{llll}
+    \textbf{Active days} & \textbf{Start} & \textbf{End} & \textbf{Weight} \\ \hline
+    Monday - Friday      & 07:00:00       & 09:00:00     & 1.2             \\
+    Monday - Friday      & 15:00:00       & 17:00:00     & 1.15            \\
+    Saturday - Sunday    & 09:00:00       & 13:00:00     & 1.025           \\
+    Saturday - Sunday    & 20:00:00       & 23:59:59     & 1.15            \\
+    Saturday - Sunday    & 00:00:00       & 00:04:00     & 1.4             \\ \hline
+    \end{tabular}
+    \caption{Critical time intervals with weights}
+    \label{tab:crittimevalues}
+\end{table}
+
+\begin{table}
+    \begin{tabular}{ll}
+    \textbf{Interval (\%)}   & \textbf{Weight} \\ \hline
+    {[}0, 10{[}        & 1.3                   \\
+    {[}10, 20{[}       & 1.4                   \\
+    {[}20, 30{[}       & 1.5                   \\
+    {[}30, 40{[}       & 1.6                   \\
+    {[}40, 50{[}       & 1.7                   \\
+    {[}50, 60{[}       & 1.8                   \\
+    {[}60, 70{[}       & 1.9                   \\
+    {[}70, $\infty${]} & 2                     \\ \hline
+    \end{tabular}
+    \caption{Speeding intervals with weights}
+    \label{tab:speedingvalues}
+\end{table}
+
+\begin{table}
+    \begin{tabular}{ll}
+    \textbf{Interval (m/s)} & \textbf{Weight} \\ \hline
+    {[}0, 3{[}              & 1               \\
+    {[}3, 5{[}              & 1               \\
+    {[}5, 7{[}              & 1.075           \\
+    {[}7, 8{[}              & 1.1             \\
+    {[}8, 9{[}              & 1.2             \\
+    {[}9, 10{[}             & 1.4             \\
+    {[}10, 11{[}            & 1.6             \\
+    {[}11, $\infty${]}      & 1.9             \\ \hline
+    \end{tabular}
+    \caption{Acceleration, brake and jerk intervals with weights}
+    \label{tab:accelerationvalues}
+\end{table}
+
+\begin{table}
+    \begin{tabular}{ll}
+    \textbf{Action} & \textbf{Base weight} \\ \hline
+    Acceleration    & 50                   \\
+    Brake           & 75                   \\
+    Jerk            & 62.5                 \\ \hline
+    \end{tabular}
+    \caption{Base weights for accelerations, brakes and jerks}
+    \label{tab:basevalues}
+\end{table}
+
+\begin{table}
+    \begin{tabular}{ll}
+    \textbf{Parameter} & \textbf{Weight} \\ \hline
+    A                  & 1.02            \\
+    B                  & 1.05            \\
+    C                  & 0               \\
+    Polynomial degree  & 1.08            \\ \hline
+    \end{tabular}
+    \caption{Weights for all polynomial functions}
+    \label{tab:polyvalues}
+\end{table}
