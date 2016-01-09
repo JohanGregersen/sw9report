@@ -15,7 +15,19 @@ Test case 2 can be seen in figure \ref{fig:longtrips}. These are longer and more
 
 For traditional insurance, the car owners would be accountable for just the distance driven. Thus, in the two test cases, the trips would cost approximately the same. With more data to look at, we can see why this should not be the case.
 
+\subsection{Test Case 1} \label{subsec:expe1}
 Looking at the data from test case 1 (\ref{tab:shorttrips}), accelerations, brakes and jerks are very similar, both in count and distribution across intervals. Green trip has slightly higher counts, but the distributions reveal no clear winner across the categories. While the trips were driven on the same route, these similarities are not a given, but can possibly be attributed to the same driver driving both trips. Speeding, however, sets these trips apart. In spite of the similarities, the car sped over triple on green trip, compared to red trip. 3.24 kilometers of speeding on an 8.08 kilometer trip is a lot, and should cost more than the 1.02 kilometers on red trip.
+
+Table \ref{tab:shorttripscores} shows the resulting scores for test case 1. The base score for both trips is identical to the distance driven, but in meters. A slight difference can be seen on roadtypes, in spite of the routes being near identical. This can be attributed to very subtle deviations (There is also a 5.71 meter difference on the trips), and the timing of each GPS point when roadtypes change. The biggest difference is as expected: Due to the excessive speeding, green trip is charged for an additional 1564.05 meters, compared to red trip. Accelerations, brakes and jerks are also judged to be slightly worse, although the difference is more subtle. In the end Green trip pays for over 12 kilometers, in spite of driving a significantly smaller distance. Red trip is at a more decent 10.3 kilometers, but still some way from the possible 8478.08 meters that a careful driver might achieve, given the profile of the roads driven.
+
+\subsection{Test Case 2} \label{subsec:expe2}
+In test case 2, we have a three-way comparison. The routes are not exactly the same, although sharing a majority, as seen on \ref{fig:longtrips}. Looking at table \ref{tab:longtrips}, containing data from these trips, differences are very clear. Green trip is driven extremely well compared to the other two; low counts on accelerations, brakes and jerks, intervals exclusively in the low end, and almost no speeding. It can be noted that the counts on this trip is about as low as trips in test case 1 (See table \ref{tab:shorttrips}), in spite of the trip being approximately 4 times as long.
+Looking at red trip for contrast, we have a vast increase in all counts; More accelerations, brakes and jerks, and worse distribution of the intervals. Of the total 31.76 kilometers driven, 13.06 of these were driven above the speed limit, mostly in the interval of 20-30\% above.
+It is noteworthy that in spite of the massive differences, both of these trips were driven with the same car. Whether this indicates the driver being in a rush on green trip, or a different driver is difficult to predict with single examples - but the differences are clear.
+
+The purple trip originates from another car. Looking at acceleration, brake and jerk counts along with the amount of speeding, the trip is clearly positioned between the other two trips. The matching intervals provides an extended view on these counts, indicating this driver consistently makes rapid changes in speed. Both acceleration, brake and jerk intervals reached more than 11m/s on several occations. The worst offender is the jerks distribution - 56\% in this interval. This is a striking contrast to the green and red trip, where the worst case for this interval is 8\% on braking.
+
+The accumulated scores seen in \ref{tab:longtripscores} are largely as expected. Red trip is very expensive due to the excessive speeding, and the sheer amount of changes in speed. Green trip comes very close to the best possible score of 32764.82 for the route. The extra cost from driving style adds up to only 825.57 meters. Purple trip is charged extra for driving on a tuesday morning where traffic is expected. In spite of red trip having higher counts of accelerations brakes and jerks, purple trip costs more on these points combined. This is due to the distributions which were significantly worse for the purple trip.
 
 \begin{table}
     \begin{tabular}{lll}
@@ -29,23 +41,23 @@ Looking at the data from test case 1 (\ref{tab:shorttrips}), accelerations, brak
     Jerk                & 213,27              & 158,06            \\ \hline
     \textbf{Total}      & \textbf{12106,72}   & \textbf{10324,60} \\ \hline
     \end{tabular}
-    \caption{Trip scores for test case 1}
+    \caption{Trip score distribution for test case 1}
     \label{tab:shorttripscores}
 \end{table}
 
 \begin{table}
     \begin{tabular}{llll}
-    \textbf{Score type} & \textbf{Red trip} & \textbf{Green trip} & \textbf{Purple trip} \\ \hline
-    Base                & 31763,97            & 31660,97          & 32043,83             \\
-    RoadType            & 873,51              & 696,54            & 720,99               \\
-    Critical time       & 0                   &  237,46           & 0                    \\
-    Speeding            & 12291,53            & 2544,64           & 8,96                 \\
-    Acceleration        & 431,74              & 914,66            & 115,16               \\
-    Brake               & 1996,90             & 1778,41           & 317,33               \\
-    Jerk                & 998,09              & 2857,83           & 384,12               \\ \hline
-    \textbf{Total}      & \textbf{48355,73}   & \textbf{40690,52} & \textbf{33590,39}    \\ \hline
+    \textbf{Score type} & \textbf{Green trip} & \textbf{Red trip} & \textbf{Purple trip}\\ \hline
+    Base                & 32043,83            & 31763,97          & 31660,97            \\
+    RoadType            & 720,99              & 873,51            & 696,54              \\
+    Critical time       & 0                   & 0                 & 237,46              \\
+    Speeding            & 8,96                & 12291,53          & 2544,64             \\
+    Acceleration        & 115,16              & 431,74            & 914,66              \\
+    Brake               & 317,33              & 1996,90           & 1778,41             \\
+    Jerk                & 384,12              & 998,09            & 2857,83             \\ \hline
+    \textbf{Total}      & \textbf{33590,39}   & \textbf{48355,73} & \textbf{40690,52}   \\ \hline
     \end{tabular}
-    \caption{Trip scores for test case 2}
+    \caption{Trip score distribution for test case 2}
     \label{tab:longtripscores}
 \end{table}
 
@@ -84,7 +96,7 @@ Looking at the data from test case 1 (\ref{tab:shorttrips}), accelerations, brak
     Brakes ($>$5m/s)        & 29                   & 71                  & 55                 \\
     Jerks ($>$5m/s)         & 21                   & 56                  & 41                 \\
     Roadtype intervals      & 49 10 00 27 5  0 2 0 & 54 0 0 29 7 0 3 0   & 5800003003000200   \\
-    Speeding intervals      & 100 0 0 0 0 0 0 0    & 22 96 20 60 0 0 0 0 & 78 5 4 13 0 0 0 0  \\
+    Speeding intervals      & 100 0 0 0 0 0 0 0    & 02 29 62 06 0 0 0 0 & 78 5 4 13 0 0 0 0  \\
     Acceleration intervals  & 0 0 94 6 0 0 0 0     & 0 0 84 6 8 2 0 0    & 0 0 68 3 6 0 3 21  \\
     Brake intervals         & 0 0 90 10 0 0 0 0    & 0 0 61 13 10 6 3 8  & 0 0 62 11 5 9 0 13 \\
     Jerk intervals          & 0 0 57 24 10 5 0 5   & 0 0 64 16 7 7 4 2   & 0 0 32 5 5 2 0 56  \\

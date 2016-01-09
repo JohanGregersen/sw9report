@@ -1,13 +1,19 @@
 \section{DATA FOUNDATION}\label{sec:datafound}
 
-\subsection{Preliminary Concepts}
 
-First, confirm that you have the correct template for your paper size. This template has been tailored for output on the US-letter paper size. Please do not use it for A4 paper since the margin requirements for A4 papers may be different from Letter paper size.
+
+
+Trip?
+
+
+
+\subsection{Preliminary Concepts}\label{subsec:precon}
+\textbf{Metrics} is a set of attributes describing the way a car travels from a position  to a destination. Measures are calculated point by point in a GPS Fact, and a point describes what has changed since the previous point. The chosen metrics are metersdriven(meters), critical-time-period(high risk temporal timespan), road-type(high risk spatial segments), acceleration($m/s^2$), brake($m/s^2$), jerk($m/s^3$), meters sped(meters), steady-speed(boolean). 
+
+\textbf{Policy} is a billing scheme for an insurance company. Given this scheme, the cost of a given set of metrics for a trip is defined. If the policy is changed, the cost of a trip is changed. An insurance company have the option to run multiple policies.
 
 \subsection{INFATI dataset}
-
-The template is used to format your paper and style the text. All margins, column widths, line spaces, and text fonts are prescribed; please do not alter them. You may note peculiarities. For example, the head margin in this template measures proportionately more than is customary. This measurement and others are deliberate, using specifications that anticipate your paper as one part of the entire proceedings, and not as an independent document. Please do not revise any of the current designations
+The INFATI dataset\cite{art:INFATI} is a collection of spatio-temporal data, collected in 2000-2001. It consist of 20 unique cars, each providing their own separated collection of data. This is a total of 1.895.085 rows of spatio-temporal car-data. The data is logged with 1Hz, and mainly involves trajectories in northern Jutland. The purpose of the INFATI\cite{art:INFATI} project was to research driver response to alert issued by a device installed in the car. A green light is shown when the car is below the speed limit. A red light is displayed when above the speed limit, additional to a womans voice saying ''you are driving too fast''.
 
 \subsection{OpenStreetMap}
-
-The template is used to format your paper and style the text. All margins, column widths, line spaces, and text fonts are prescribed; please do not alter them. You may note peculiarities. For example, the head margin in this template measures proportionately more than is customary. This measurement and others are deliberate, using specifications that anticipate your paper as one part of the entire proceedings, and not as an independent document. Please do not revise any of the current designations
+OpenStreetMap\cite{osm} is a an open source digital roadmap offered  and maintained by the OpenStreetMap community. This project makes use of the digital roadmap of Denmark, which was provided along-side the INFATI dataset\cite{art:INFATI}. The digital roadmap of Denmark contains 762.155 rows of segment information.
