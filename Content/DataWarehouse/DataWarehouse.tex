@@ -32,7 +32,7 @@ Amongst the fact tables there is a certain hierarchy, the GPS fact table is the 
 {[}7, $\infty$ {]}       & 1.80              &   0             & 0              \\\hline
 \end{tabular}
 \caption{An example of Acceleration Interval}
-\label{tab:intervalexampe}
+\label{tab:intervalexample}
 \end{table}
 
 All of the accelerations for the trip are divided into different intervals depending on their severity. The intervals and weights are determined by some policy presented by the insurance company, meaning you can have different policies throughout the system. The policy is represented by the 2nd and 3rd digit in the bigint. As the total amount of delinquencies can extend 100, and there is only 2 digits representing each number, the percentage of delinquencies are used instead. If one of the intervals contains 100\% of the delinquencies, the 1st digit of the bigint is set to 1. So this particular example would result in the following interval representation in bigint;

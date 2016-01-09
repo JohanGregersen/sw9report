@@ -1,27 +1,42 @@
 \section{TRIP SCORING}\label{sec:trip}
 
 This section describes one of the biggest contribution of this paper, the evaluation of each trip. The final score of trip directly correlates with meters, meaning the client can get information on how many meters each of the metrics have cost him. The authors found this representation highly relatable as a representation of score.
-Because of this the base score of any trip is the amount of meters driven, meaning you always as a customer pay for the length of the trip. The metrics are described in section \ref{subsec:precon}.
+Because of this, the base score of any trip is the amount of meters driven, meaning you always as a customer, pay for the length of the trip. The metrics are described in section \ref{subsec:precon}.
+It is important emphasise that the entire calculation is possible based only on an entry in the \textit{Trip Fact} table. This means the insurance companies can make the calculation without any use of sensitive information and personal data.
 
 \subsection{Subscores} 
 
-Subscores is a term for the scores of each individual metric. These scores are calculated individually and added to the base score. The metrics are divided into two different categories, metrics who are scored linearly and metrics who are scored polynomially. Being scored polynomially means that delinquencies are punished more and more severe as the amount increases.
+Subscores is a term for the scores of each individual metric. These scores are calculated individually and added to the base score. The metrics are divided into two different categories, metrics who are scored linearly and metrics who are scored polynomially. Being scored polynomially means that delinquencies are punished more and more severely as the amount increases.
 
-Whether the score is calculated linearly or polynomial they share a calculation of a accumulated weight. Accumulated weight is a weight dependant on the distribution of delinquencies and the weight of the intervals.
-
-$$
-\sum _{ i\quad =\quad 1 }^{ n }{ { interval }_{ i }*\quad { weight }_{ i } } \eqno{(1)}
-$$
+Whether the score is calculated linearly or polynomial they share a calculation of an accumulated weight. The accumulated weight is a calculation dependant on the distribution of delinquencies and the weight of the intervals.
 
 $$
-\sum _{ i\quad =\quad 1 }^{ n }{ { interval }_{ i }*\quad { weight }_{ i } } \eqno{(1)}
+\left( \frac { \sum _{ i }^{ n }{ \left( { interval }_{ i }*\quad { weight }_{ i } \right)  }  }{ 100 }  \right) \quad -\quad 1
 $$
 
+The equation calculates an accumulated weight by multiplying the percentage in each interval with the weight and dividing it with 100. This means the accumulated weight is calculated based on distribution as well. 1 is then subtracted for purposes explained later. The calculation of accumulated weight for the example given in table \ref{tab:intervalexample} would be;
+\begin{align*}
+(1.05\quad *\quad 40)\quad +\quad (1.1\quad *\quad 20)\quad +\quad \quad \\ 
+  (1.15\quad *\quad 10)\quad +\quad (1.25\quad *\quad 5)\quad +\quad \quad \\
+  (1.35\quad *\quad 10)\quad +\quad (1.45\quad *\quad 5)\quad +\quad \quad \\
+  (1.55\quad *\quad 10)\quad \quad \quad \quad \quad \quad \quad \quad \ \ \ \quad =\ 118 \\
+\end{align*}
+The result multiplying weights with interval percentages is 118, meaning for each 100th delinquency, we count it as 118.
+
+\begin{align*}
+\frac { 118 }{ 100 } \quad -\quad 1\quad =\quad 0.18
+\end{align*}
+
+
+This leaves us with an accumulated weight of 0.18. This equation is important to consider when dealing with both linearly scoring and polynomial scoring\\
 
 \textbf{Linear Scoring} metrics are \textit{Critical Time Period} and \textit{RoadTypes}. They are considered linearly because of the fact that it is not possible for the driver to directly control the metric. The authors do not want to punish drivers for something they are not in control of. 
+The simplicity of a linear scoring model means that the equation is simply to multiply \textit{metersdriven} with the accumulated weight.
 
+\textbf{Polynomial Scoring} metrics are \textit{MetersSped}, \textit{Acceleration}, \textit{Jerks} and \textit{Brakes}. These metrics are controllable by the user at every given point in a trip. They are graded polynomially because continually committing these delinquencies are to be frowned upon. It is nearly impossible to drive a trip without having a couple of delinquencies therefore the first couple of delinquencies have less impact than the last. The insurance company has an option to define a polynomial equation for each delinquency.
 
-
-\textbf{Polynomial Scoring}
-
-\subsection{Calculating Trip Scores}
+\begin{align*}
+ax^{y} + bx + c\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \\
+where\quad x = AcummulatedWeight
+\end{align*}
+The last step is multiplying the new value with the amount of delinquencies and some base price for each delinquency. Note that this is independent of the length on trip, so the insurance company might want to include it for their polynomial setting.
