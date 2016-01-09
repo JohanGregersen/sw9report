@@ -1,16 +1,14 @@
 \section{DATA FOUNDATION}\label{sec:datafound}
 
-
-
-
-Trip?
-
-
+This section describes the different data sources. The first paragraph describes concepts that are vital for the understanding of this paper.
+The paragraphs after describe the basis data foundation for the system, namely the INFATI dataset and OpenStreetMap.
 
 \subsection{Preliminary Concepts}\label{subsec:precon}
 \textbf{Metrics} is a set of attributes describing the way a car travels from a position  to a destination. Measures are calculated point by point in a GPS Fact, and a point describes what has changed since the previous point. The chosen metrics are metersdriven(meters), critical time(high risk temporal timespan), roadtype(high risk spatial segments), acceleration($m/s^2$), brake($m/s^2$), jerk($m/s^3$), meters sped(meters), steady-speed(boolean). 
 
 \textbf{Policy} is a billing scheme for an insurance company. Given this scheme, the cost of a given set of metrics for a trip is defined. If the policy is changed, the cost of a trip is changed. An insurance company have the option to run multiple policies.
+
+\textbf{Trips} are the authors term for set of continual GPS-coordinates. Whenever 3 minutes passes after the last GPS-point was logged, the trip is ended. The next GPS-point logged will be the starting point of the next trip.
 
 \subsection{INFATI dataset}
 The INFATI dataset\cite{art:INFATI} is a collection of spatio-temporal data, collected in 2000-2001. It consist of 20 unique cars, each providing their own separated collection of data. This is a total of 1.895.085 rows of spatio-temporal car-data. The data is logged with 1Hz, and mainly involves trajectories in northern Jutland. The purpose of the INFATI\cite{art:INFATI} project was to research driver response to alert issued by a device installed in the car. A green light is shown when the car is below the speed limit. A red light is displayed when above the speed limit, additional to a womans voice saying ''you are driving too fast''.
