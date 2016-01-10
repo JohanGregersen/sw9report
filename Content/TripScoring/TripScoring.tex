@@ -14,7 +14,7 @@ $$
 \left( \frac { \sum _{ i }^{ n }{ \left( { interval }_{ i }*\quad { weight }_{ i } \right)  }  }{ 100 }  \right) \quad -\quad 1
 $$
 
-The equation calculates an accumulated weight by multiplying the percentage in each interval with the weight and dividing it with 100. This means the accumulated weight is calculated based on distribution as well. 1 is then subtracted for purposes explained later. The calculation of accumulated weight for the example given in table \ref{tab:intervalexample} would be;
+The equation calculates an accumulated weight by multiplying the percentage in each interval with the weight and dividing it with 100. This means the accumulated weight is calculated based on distribution as well. 1 is subtracted because the accumulated weight, at a later point in the calculation, is multiplied with metersdriven as the costs should correlate with the length of the trip. The calculation of accumulated weight for the example given in table \ref{tab:intervalexample} would be;
 \begin{align*}
 (1.05\quad *\quad 40)\quad +\quad (1.1\quad *\quad 20)\quad +\quad \quad \\ 
   (1.15\quad *\quad 10)\quad +\quad (1.25\quad *\quad 5)\quad +\quad \quad \\
@@ -39,4 +39,18 @@ The simplicity of a linear scoring model means that the equation is simply to mu
 ax^{y} + bx + c\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \\
 where\quad x = AcummulatedWeight
 \end{align*}
-The last step is multiplying the new value with the amount of delinquencies and some base price for each delinquency. Note that this is independent of the length on trip, so the insurance company might want to include it for their polynomial setting.
+
+If we follow the previous example of acceleration and given the polynomial equation $1.25x^{1.08} +  1.12x + 0$, the calculation would be;
+
+\begin{align*}
+(1.25 * 0.18)^{1.08} +  1.12 * 0.18 + 0\quad \quad  =\ 0.40129
+\end{align*}
+
+The last step is multiplying the new value with the amount of delinquencies and some base price for each delinquency. In the example we will use a base price for an acceleration of 50 meters.
+
+\begin{align*}
+80 * 50 * 0.40129\quad \quad \quad \quad \quad \quad \quad \quad =\ 1605.16
+\end{align*}
+
+
+Given 80 accelerations, the intervals and insurance policy described in table \ref{tab:intervalexample}, the cost added from accelerations would be 1605.16 meters. Note that this is independent of the length on trip, so the insurance company might want to include \textit{metersdriven} for their polynomial setting.
