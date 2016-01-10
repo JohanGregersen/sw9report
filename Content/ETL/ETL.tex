@@ -1,6 +1,13 @@
 \section{ETL}\label{sec:ETL}
 The data foundation for this project relies on two sources, refer section \ref{sec:datafound}. Extract-Transform-Load(ETL) is an important phase for integrating these two sources of information into the data warehouse while ensuring a uniform data-representation. A preprocessing procedure fills static support-tables and dimensions with data. The data foundation contains data for car information and part of GPS Fact. After the preliminary data is loaded, a number of post-processing procedures fills the remaining tables in the data warehouse with data.
 
+\begin{figure*}[tb]
+\centering
+\includegraphics[width=0.9\textwidth]{Pictures/ETL}
+\caption{Dataflow throughout the ETL process}
+\label{fig:etl}
+\end{figure*}
+
 The INFATI project\cite{art:INFATI} uses a digital roadmap from OpenStreetMap\cite{osm}. The same digital roadmap is used for this project. A few modifications is introduced, like storing the column \textit{direction} as a smallint instead of a textual representation. 
 
 The INFATI dataset\cite{art:INFATI} contains 17 columns of data, separated by a varying number of spaces. Due to the natural challenges of map-matching, some entries contain only 14 columns of data. This causes the dataset to have problems with trailing zeros when loading with a space-separator. To ease the ETL process, a script has to be made for altering the separator. In this example \# is used, and whenever a row was not map-matched, three \#'s are appended to that row.
