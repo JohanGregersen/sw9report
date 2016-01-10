@@ -1,9 +1,26 @@
 \section{RELATED WORK}\label{sec:relwork}
+
+%%%%%%%%%%%%%%%% UBI IN GENERAL %%%%%%%%%%%%%%%% 
+T. Litman presents validation for naive UBI solutions\cite{art:PAYDVehInsur}\cite{art:vehicfeacosben}\cite{art:PAYDafford} . He clarifies how insurance policy equity, affordability and traffic-safety can be improved through UBI. These perspectives are supported by Bordoff et. al\cite{art:PAYDredharms}. Both do not contribute any implementation strategies.
+
+F. Brineteau, autonomous and part of Ptolemus Consulting, talks about UBI in general, and the future impact of UBI from a market analysis perspective \cite{art:telematicsmatter}\cite{mar:telematics12}\cite{mar:ubi13}\cite{mar:ubi16}. Both state that it will be an increasingly interesting market and the insurance industry will try to earn revenue through UBI in the future.
+
+%%%%%%%%%%%%%%%% UBI implementering %%%%%%%%%%%%%%%% 
+P. Händel et. al. propose a smartphone-based UBI solution\cite{art:insurtelematics}\cite{art:smartphonemonitor}. They discuss the stability issues using a smartphone GPS signal. They also suggest a number of metrics for how to differentiate between trips, but assume complete trajectory information. They do not consider the policyholders privacy nor propose a data storage solution, which distinguish their work from ours.
+
+C. Troncoso et. al. propose an UBI solution with a black box mounted in the car\cite{art:PriPAYDprivacy}. This solution is designed to be privacy secure as computations are performed inside the black box, and only aggregated data are sent to the insure company. The paper does not propose a model for differentiating trips nor propose a data storage solution.
+
+%%%%%%%%%%%%%%%% Data storage and security %%%%%%%%%%%%%%%%
 Andersen, Krogh, Thomsen and Torp presents a data warehouse model for storing large amounts of GPS data, paired with a large quantity of dimensions to facilitate many different kinds of analysis\cite{art:gpswarehouse}. We also want to store a large amount of GPS data, but rather focus on what we can eliminate from the insurance company data collection, while still enabling advanced billing schemes. A smaller snowflake schema is therefore a valuable feature rather than a disadvantage.
 
+H. Gregesen et. al conducted a survey about modeling time-varying information within an ER-diagram\cite{art:modeltimevary}. We looked at the basic cases without time-variation. 
 
+%%%%%%%%%%%%%%%% andet %%%%%%%%%%%%%%%%
+H. Li et. al. talks about simplifying trajectories for inferring travel paths. Their work deals with the problem of linking holes in trajectories. We used their work as inspiration to decide on linear interpolation within our system. When an entry is considered as an outlier, we interpolate between the neighbor entries to reconnect the trajectory.
 
-
+\begin{comment}
+RELATED WORK
+%%
 another article underbuildning PAYD because it says it reduces influence on the community
 \cite{art:vehicfeacosben}
 
@@ -16,20 +33,41 @@ talks about descreasing premium cost for users who dont drive that far each year
 
 justification and effects of PAYD on equity and lowering harms
 \cite{art:PAYDredharms}
+%%
+
+Generelt snak om UBI på et konceptuelt plan
+\cite{art:telematicsmatter}
+\cite{mar:telematics12}
+\cite{mar:ubi13}
+\cite{mar:ubi16}
+
+
+The most similar research compared to what we did. They talk about a bundle of metrics, not completely similar to ours, because they also consider available spatial data. They also talk about launching UBI from a smartphone and the stability issues regarding this way of logging. A comparison of signal coverage/available is also presented.
+Insurance Telematics - Opportunities and challenges with the smartphone solution
+\cite{art:insurtelematics}
 
 
 
-
+Road vehicle traffic probing done through smartphone, funded through facilitating UBI, what metrics to use but not a calculation or storage
+acceleration, braking, smoothness, cornering, swerving, and speeding.
+Smartphone-based measurement system
+\cite{art:smartphonemonitor}
 
 PriPAYD: Privacy-Friendly
 Pay-As-You-Drive Insurance
 local "in-box" calculations, aggregated data sent to the insurance company
 provides a list of PAYD implementations
 focus on how to secure the data in the box, not how to store and price
-\citep{art:PriPAYDprivacy}
+\cite{art:PriPAYDprivacy}
 
-CONCEPTUAL MODELLING
-Insurance telematics
-smartphone-based measure
-spatio-temporal simpli
-temporal-entity
+
+Talks about modeling temporal data within an ER diagram.
+(propose time-varying, but also the basic case which we use)
+CONCEPTUAL MODELLINGof time-varying information
+\cite{art:modeltimevary}
+
+We use this article to decide on linear interpolation
+Spatio-Temporal Trajectory Simplification for Inferring Travel Paths
+\cite{art:inftravelpath}
+
+\end{comment}
