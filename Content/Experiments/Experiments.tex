@@ -1,5 +1,95 @@
 \section{EXPERIMENTS}\label{sec:expe}
-Experiments are conducted to demonstrate the possibility to score similar routes different, based on the calculated metrics stored in the system. Therefore, a policy is created using parameters and variables found reasonable by the authors. An insurance company would have to decide on these parameters for policies offered to customers. The chosen parameters and values can be seen in tables \ref{tab:roadtypevalues}, \ref{tab:crittimevalues}, \ref{tab:speedingvalues}, \ref{tab:accelerationvalues}, \ref{tab:basevalues}, and \ref{tab:polyvalues}.
+Experiments are conducted to demonstrate the possibility to score similar routes differently, based on the calculated metrics stored in the system. Therefore, a policy is created using parameters and variables found reasonable by the authors. An insurance company would have to decide on these parameters for policies offered to customers. The chosen parameters and values can be seen in tables \ref{tab:roadtypevalues}, \ref{tab:crittimevalues}, \ref{tab:speedingvalues}, \ref{tab:accelerationvalues}, \ref{tab:basevalues}, and \ref{tab:polyvalues}.
+
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+    \textbf{Roadtype} & \textbf{Weight} \\ \hline
+    Motorway          & 1               \\
+    Trunk             & 1               \\
+    Primary           & 1               \\
+    Secondary         & 1.05            \\
+    Tertiary          & 1.1             \\
+    Unclassified      & 1.1             \\
+    Residential       & 1.2             \\
+    Service           & 1.2             \\ \hline
+    \end{tabular}
+    \caption{Roadtypes with weights}
+    \label{tab:roadtypevalues}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{llll}
+    \textbf{Active days} & \textbf{Start} & \textbf{End} & \textbf{Weight} \\ \hline
+    Monday - Friday      & 07:00:00       & 09:00:00     & 1.2             \\
+    Monday - Friday      & 15:00:00       & 17:00:00     & 1.15            \\
+    Saturday - Sunday    & 09:00:00       & 13:00:00     & 1.025           \\
+    Saturday - Sunday    & 20:00:00       & 23:59:59     & 1.15            \\
+    Saturday - Sunday    & 00:00:00       & 00:04:00     & 1.4             \\ \hline
+    \end{tabular}
+    \caption{Critical time intervals with weights}
+    \label{tab:crittimevalues}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+    \textbf{Interval (\%)}   & \textbf{Weight} \\ \hline
+    {[}0, 10{[}        & 1.3                   \\
+    {[}10, 20{[}       & 1.4                   \\
+    {[}20, 30{[}       & 1.5                   \\
+    {[}30, 40{[}       & 1.6                   \\
+    {[}40, 50{[}       & 1.7                   \\
+    {[}50, 60{[}       & 1.8                   \\
+    {[}60, 70{[}       & 1.9                   \\
+    {[}70, $\infty${]} & 2                     \\ \hline
+    \end{tabular}
+    \caption{Speeding intervals with weights}
+    \label{tab:speedingvalues}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+    \textbf{Interval (m/s)} & \textbf{Weight} \\ \hline
+    {[}0, 3{[}              & 1               \\
+    {[}3, 5{[}              & 1               \\
+    {[}5, 7{[}              & 1.075           \\
+    {[}7, 8{[}              & 1.1             \\
+    {[}8, 9{[}              & 1.2             \\
+    {[}9, 10{[}             & 1.4             \\
+    {[}10, 11{[}            & 1.6             \\
+    {[}11, $\infty${]}      & 1.9             \\ \hline
+    \end{tabular}
+    \caption{Acceleration, brake and jerk intervals with weights}
+    \label{tab:accelerationvalues}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+    \textbf{Action} & \textbf{Base weight} \\ \hline
+    Acceleration    & 50                   \\
+    Brake           & 75                   \\
+    Jerk            & 62.5                 \\ \hline
+    \end{tabular}
+    \caption{Base weights for accelerations, brakes and jerks}
+    \label{tab:basevalues}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+    \textbf{Parameter} & \textbf{Weight} \\ \hline
+    A                  & 1.02            \\
+    B                  & 1.05            \\
+    C                  & 0               \\
+    Polynomial degree  & 1.08            \\ \hline
+    \end{tabular}
+    \caption{Weights for all polynomial functions}
+    \label{tab:polyvalues}
+\end{table}
 
 To test this policy, and thereby the developed system, trips were handpicked from the INFATI dataset\cite{art:INFATI}. This was done on the following criteria:
 
@@ -12,7 +102,14 @@ To test this policy, and thereby the developed system, trips were handpicked fro
 From these criteria, two different test cases were picked. The trips included in these cases are visualized in figures \ref{fig:shorttrips} and \ref{fig:longtrips} with two and three trips respectively. The first being two short-distance trips, and second being three long distance trips.
 
 \subsection{Test Case 1} \label{subsec:expe1}
-Test case 1, is visualized in \ref{fig:shorttrips} and represents two $\sim$8.1km equal trips, driven from an original destination to a target-destination and back with the same car. The route driven is simple and has very few turns. One trip is colored green, the other is colored red. The spatial information is not available to a trip-entry, therefore the digital roadmap layer is omitted.
+Test case 1, is visualized in figure \ref{fig:shorttrips} and represents two $\sim$8.1km equal trips, driven back and forth with the same car. The route driven is simple and has very few turns. The trips are visualized in red and green color.
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=40mm]{Pictures/ShortTrips.png}
+    \caption{Green and red route for test case 1}
+    \label{fig:shorttrips}
+\end{figure}
 
 For naive usage-based-insurance, the car owners would be accountable for just the distance driven. Thus, the trips would cost approximately the same. With the developed advanced usage-based-insurance approach, it is demonstrated why this should not be the case.
 
@@ -20,19 +117,8 @@ Looking at the metrics from test case 1 (\ref{tab:shorttrips}), accelerations, b
 
 The calculated tripscores for test case 1 can be seen in table \ref{tab:shorttripscores}. The base score for both trips is identical to the distance driven denoted in meters. A slight difference can be seen on road-types, in spite of the routes being near identical. This can be attributed to very subtle deviations like the timing of each GPS point when roadtypes change or the success of the map-matching algorithm used. The biggest difference is as expected: Due to the excessive speeding the green trip is charged an additional 1564.05 meters, compared to red trip. Accelerations, brakes and jerks are also judged to be slightly worse, although the difference is more subtle. In the end green trip pays for over 12 kilometers, despite driving only $\sim$8.1 kilometers. Red trip is substantially less with 10.3 kilometers, but still some way from the possible 8478.08 meters that a careful driver might achieve, given that the influence of roadtypes are considered uncontrollable.
 
-\subsection{Test Case 2} \label{subsec:expe2}
-Test case 2 can be seen in figure \ref{fig:longtrips}. These are longer and more complex trips between $\sim$31.7km and $\sim$32.0km in distance. The trips involve two different cars. 
-
-This test case is a three-way comparison, consisting of green trip, red trip and purple trip. The routes are not exactly the same, although sharing a majority of the same segments, as seen in figure \ref{fig:longtrips}. Looking at table \ref{tab:longtrips}, containing data from these trips, the differences in metrics are very clear. Green trip is driven extremely well compared to the other two; low counts on accelerations, brakes and jerks, intervals exclusively in the low end, and almost no speeding. Note that the total counts on this trip are about as low as the trips in test case 1 (See table \ref{tab:shorttrips}), despite being approximately 4 times as long.
-Looking at red trip for comparison, we have a vast increase in all counts; More accelerations, brakes and jerks, and worse distribution of the intervals. A total of 31.76 kilometers driven, 13.06 kilometers of these were driven above the speed limit, mostly in the interval of 20-30\% above the speed limit.
-
-It is noteworthy that despite of the massive differences in metrics, both of these trips were driven by the same car. Whether this indicates the driver being in a rush on green trip, or a different driver is difficult to predict with single examples - but the differences are clear.
-
-The purple trip is driven by a different car. Looking at acceleration, brake and jerk counts along with the amount of speeding, table \ref{tab:longtrips}, the trip is clearly positioned between the other two trips. The matching intervals provides an extended view on these counts, indicating that this driver consistently makes rapid changes in speed. Both acceleration, brake and jerk intervals reached more than 11m/s on several occasions. The worst offender is the jerks distribution - 56\% of the jerks is positioned in the worst interval 11$m/s^3$ or above that. This is a striking contrast to the green and red trip, in which the worst case for this interval is 8\% on braking.
-
-The accumulated scores seen in \ref{tab:longtripscores} are as expected given the driving patterns. Red trip is very expensive due to the excessive speeding, and the sheer amount of changes in speed. Green trip comes very close to the best possible score of 32764.82(base $+$ roadtype) for a route of 32043.83 meters. The extra cost from driving style adds up to only 825.57 meters(all metrics). Purple trip is charged extra for driving on a Tuesday morning where heavier traffic is expected. In spite of red trip having higher counts of accelerations brakes and jerks in total amounts, purple trip cost more on these points combined. This is due to the distributions which were significantly worse for the purple trip, meaning each delinquency has been significantly more severe.
-
 \begin{table}
+    \centering
     \begin{tabular}{lll}
     \textbf{Score type} & \textbf{Green trip} & \textbf{Red trip} \\ \hline
     Base                & 8076,23             & 8070,52           \\
@@ -48,7 +134,27 @@ The accumulated scores seen in \ref{tab:longtripscores} are as expected given th
     \label{tab:shorttripscores}
 \end{table}
 
+\subsection{Test Case 2} \label{subsec:expe2}
+Test case 2 can be seen in figure \ref{fig:longtrips}. These are longer and more complex trips between $\sim$31.7km and $\sim$32.0km in distance. These trips have more turns and are driven on a mix of roadtypes. The trips involve two different cars. 
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=80mm]{Pictures/LongTrips.png}
+    \caption{Green, red and purple route for test case 2}
+    \label{fig:longtrips}
+\end{figure}
+
+This test case is a three-way comparison, consisting of green trip, red trip and purple trip. The routes are not exactly the same, although sharing a majority of the same segments, as seen in figure \ref{fig:longtrips}. Looking at table \ref{tab:longtrips}, containing data from these trips, the differences in metrics are very clear. Green trip is driven extremely well compared to the other two; low counts on accelerations, brakes and jerks, intervals exclusively in the low end, and almost no speeding. Note that the total counts on this trip are about as low as the trips in test case 1 (See table \ref{tab:shorttrips}), despite being approximately 4 times as long.
+Looking at red trip for comparison, we have a vast increase in all counts; More accelerations, brakes and jerks, and worse distribution of the intervals. A total of 31.76 kilometers driven, 13.06 kilometers of these were driven above the speed limit, mostly in the interval of 20-30\% above the speed limit.
+
+It is noteworthy that despite of the massive differences in metrics, both of these trips were driven by the same car. Whether this indicates the driver being in a rush on green trip, or a different driver is difficult to predict with single examples - but the differences are clear.
+
+The purple trip is driven by a different car. Looking at acceleration, brake and jerk counts along with the amount of speeding in table \ref{tab:longtrips}, the trip is clearly positioned between the other two trips. The matching intervals provides an extended view on these counts, indicating that this driver consistently makes rapid changes in speed. Both acceleration, brake and jerk intervals reached more than 11m/s on several occasions. The worst offender is the jerks distribution - 56\% of the jerks is positioned in the worst interval 11$m/s^3$ or above that. This is a striking contrast to the green and red trip, in which the worst case for this interval is 8\% on braking.
+
+The accumulated scores seen in \ref{tab:longtripscores} are as expected given the driving patterns. Red trip is very expensive due to the excessive speeding, and the sheer amount of changes in speed. Green trip comes very close to the best possible score of 32764.82(base $+$ roadtype) for a route of 32043.83 meters. The extra cost from driving style adds up to only 825.57 meters(all metrics). Purple trip is charged extra for driving on a Tuesday morning where heavier traffic is expected. In spite of red trip having higher counts of accelerations brakes and jerks in total amounts, purple trip cost more on these points combined. This is due to the distributions which were significantly worse for the purple trip, meaning each delinquency has been significantly more severe.
+
 \begin{table}
+    \centering
     \begin{tabular}{llll}
     \textbf{Score type} & \textbf{Green trip} & \textbf{Red trip} & \textbf{Purple trip}\\ \hline
     Base                & 32043,83            & 31763,97          & 31660,97            \\
@@ -65,6 +171,7 @@ The accumulated scores seen in \ref{tab:longtripscores} are as expected given th
 \end{table}
 
 \begin{table*}
+    \centering
     \begin{tabular}{>{\bfseries}l|ll|}
     Figure color             & Green               & Red                 \\
     Car ID                   & 16                  & 16                  \\
@@ -87,6 +194,7 @@ The accumulated scores seen in \ref{tab:longtripscores} are as expected given th
 \end{table*}
 
 \begin{table*}
+    \centering
     \begin{tabular}{>{\bfseries}l|lll|}
     Figure color            & Green                & Red                 & Purple             \\
     Car ID                  & 10                   & 10                  & 14                 \\
@@ -98,7 +206,7 @@ The accumulated scores seen in \ref{tab:longtripscores} are as expected given th
     Accelerations ($>$5m/s) & 16                   & 49                  & 34                 \\
     Brakes ($>$5m/s)        & 29                   & 71                  & 55                 \\
     Jerks ($>$5m/s)         & 21                   & 56                  & 41                 \\
-    Roadtype intervals      & 49 10 00 27 5  0 2 0 & 54 0 0 29 7 0 3 0   & 5800003003000200   \\
+    Roadtype intervals      & 49 10 00 27 5  0 2 0 & 54 0 0 29 7 0 3 0   & 58 0 0 30 3 0 2 0  \\
     Speeding intervals      & 100 0 0 0 0 0 0 0    & 02 29 62 06 0 0 0 0 & 78 5 4 13 0 0 0 0  \\
     Acceleration intervals  & 0 0 94 6 0 0 0 0     & 0 0 84 6 8 2 0 0    & 0 0 68 3 6 0 3 21  \\
     Brake intervals         & 0 0 90 10 0 0 0 0    & 0 0 61 13 10 6 3 8  & 0 0 62 11 5 9 0 13 \\
@@ -107,102 +215,3 @@ The accumulated scores seen in \ref{tab:longtripscores} are as expected given th
     \caption{Trip data for test case 2}
     \label{tab:longtrips}
 \end{table*}
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=50mm]{Pictures/ShortTrips.png}
-    \caption{Short trips}
-    \label{fig:shorttrips}
-\end{figure}
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=80mm]{Pictures/LongTrips.png}
-    \caption{Long trips}
-    \label{fig:longtrips}
-\end{figure}
-
-
-\begin{table}
-    \begin{tabular}{ll}
-    \textbf{Roadtype} & \textbf{Weight} \\ \hline
-    Motorway          & 1               \\
-    Trunk             & 1               \\
-    Primary           & 1               \\
-    Secondary         & 1.05            \\
-    Tertiary          & 1.1             \\
-    Unclassified      & 1.1             \\
-    Residential       & 1.2             \\
-    Service           & 1.2             \\ \hline
-    \end{tabular}
-    \caption{Roadtypes with weights}
-    \label{tab:roadtypevalues}
-\end{table}
-
-\begin{table}
-    \begin{tabular}{llll}
-    \textbf{Active days} & \textbf{Start} & \textbf{End} & \textbf{Weight} \\ \hline
-    Monday - Friday      & 07:00:00       & 09:00:00     & 1.2             \\
-    Monday - Friday      & 15:00:00       & 17:00:00     & 1.15            \\
-    Saturday - Sunday    & 09:00:00       & 13:00:00     & 1.025           \\
-    Saturday - Sunday    & 20:00:00       & 23:59:59     & 1.15            \\
-    Saturday - Sunday    & 00:00:00       & 00:04:00     & 1.4             \\ \hline
-    \end{tabular}
-    \caption{Critical time intervals with weights}
-    \label{tab:crittimevalues}
-\end{table}
-
-\begin{table}
-    \begin{tabular}{ll}
-    \textbf{Interval (\%)}   & \textbf{Weight} \\ \hline
-    {[}0, 10{[}        & 1.3                   \\
-    {[}10, 20{[}       & 1.4                   \\
-    {[}20, 30{[}       & 1.5                   \\
-    {[}30, 40{[}       & 1.6                   \\
-    {[}40, 50{[}       & 1.7                   \\
-    {[}50, 60{[}       & 1.8                   \\
-    {[}60, 70{[}       & 1.9                   \\
-    {[}70, $\infty${]} & 2                     \\ \hline
-    \end{tabular}
-    \caption{Speeding intervals with weights}
-    \label{tab:speedingvalues}
-\end{table}
-
-\begin{table}
-    \begin{tabular}{ll}
-    \textbf{Interval (m/s)} & \textbf{Weight} \\ \hline
-    {[}0, 3{[}              & 1               \\
-    {[}3, 5{[}              & 1               \\
-    {[}5, 7{[}              & 1.075           \\
-    {[}7, 8{[}              & 1.1             \\
-    {[}8, 9{[}              & 1.2             \\
-    {[}9, 10{[}             & 1.4             \\
-    {[}10, 11{[}            & 1.6             \\
-    {[}11, $\infty${]}      & 1.9             \\ \hline
-    \end{tabular}
-    \caption{Acceleration, brake and jerk intervals with weights}
-    \label{tab:accelerationvalues}
-\end{table}
-
-\begin{table}
-    \begin{tabular}{ll}
-    \textbf{Action} & \textbf{Base weight} \\ \hline
-    Acceleration    & 50                   \\
-    Brake           & 75                   \\
-    Jerk            & 62.5                 \\ \hline
-    \end{tabular}
-    \caption{Base weights for accelerations, brakes and jerks}
-    \label{tab:basevalues}
-\end{table}
-
-\begin{table}
-    \begin{tabular}{ll}
-    \textbf{Parameter} & \textbf{Weight} \\ \hline
-    A                  & 1.02            \\
-    B                  & 1.05            \\
-    C                  & 0               \\
-    Polynomial degree  & 1.08            \\ \hline
-    \end{tabular}
-    \caption{Weights for all polynomial functions}
-    \label{tab:polyvalues}
-\end{table}
