@@ -15,7 +15,7 @@ Amongst the fact tables there is a certain hierarchy, the GPS fact table is the 
 
 \textbf{GPS Fact} is the center of the entire data warehouse. Each entry represents a singular GPS point of a car, with the actual timestamps. The table references all of the support tables, as well as a reference to a single tripfact. A GPS fact contains spatial attributes in \textit{Point},\textit{MPoint} and \textit{PathLine}, being GPS coordinates, map-matched GPS coordinates and a line to the previous GPS coordinate respectively. A gpsfact contains a lot of Booleans, namely \textit{Speeding}, \textit{Accelerating}, \textit{Jerking}, \textit{Braking} and \textit{SteadySpeed}, which is primarily added for querying as the actual value exists in different attributes. The actual values of the attributes are all calculated in relation to the previous points e.g. acceleration is the change in speed between now and previous point divided with the distance between them.
 
-\textbf{Trip Fact} entries represents an actual car trip through a sample of GPS coordinates. They contain a start-time and an end-time represented by 4 foreign keys to the Date and Time dimensions. A tripfact has a lot of attributes which is simply an addition from the sample of gpsfacts, namely \textit{MetersDriven}, \textit{SecondsDriven} and all of the count attributes. Each trip fact has a \textit{TripScore} and \textit{OptimalScore} which is the calculated score dependant on the insurance policy used, as well as the optimal score for the given trip, this will be described later in \ref{sec:trip}. A contribution of this article is the decision create intervals in the form of a bigInt, to represent to which degree the actual delinquency is. To explain this further, here is a clean example in Table \ref{tab:intervalexampe} with Acceleration; 
+\textbf{Trip Fact} entries represents an actual car trip through a sample of GPS coordinates. They contain a start-time and an end-time represented by 4 foreign keys to the Date and Time dimensions. A tripfact has a lot of attributes which is simply an addition from the sample of gpsfacts, namely \textit{MetersDriven}, \textit{SecondsDriven} and all of the count attributes. Each trip fact has a \textit{TripScore} and \textit{OptimalScore} which is the calculated score dependant on the insurance policy used, as well as the optimal score for the given trip, this will be described later in \ref{sec:trip}. A contribution of this article is the decision create intervals in the form of a bigInt, to represent to which degree the actual delinquency is. To explain this further, consider the example in Table \ref{tab:intervalexampe} with accelerations logged during a trip; 
 
 \begin{table}[h]
 \centering
@@ -31,11 +31,13 @@ Amongst the fact tables there is a certain hierarchy, the GPS fact table is the 
 {[}6.5, 7 {[}            & 1.55              &   8             & 10              \\
 {[}7, $\infty$ {]}       & 1.80              &   0             & 0              \\\hline
 \end{tabular}
-\caption{An example of Acceleration Interval}
+\caption{An example of accelerations and intervals}
 \label{tab:intervalexample}
 \end{table}
 
-All of the accelerations for the trip are divided into different intervals depending of their severity. The intervals and weight is determined by some policy presented by the insurance company, meaning you can have different policies throughout the system. The policy is represented by the 2nd and 3rd digit in the bigInt. As the total amount of delinquencies can extend 100, and there is only 2 digits representing each number, the percentage is used instead. If one of the intervals contains 100\% of the delinquencies the 1st digit of the bigInt is set to 1. So this particular example would result in the following bigInt;
+All of the accelerations for this trip are divided into different intervals depending of their severity. Both the intervals themselves and their associated weight are determined by some policy presented by the insurance company. In effect, the insurance company can decide exactly when a metric is important. By example, table \ref{tab:intervalexample} excludes everything from 0m/s to 3m/s, and considers everything above 7m/s as bad as it gets. Intervals between these values are chosen to have a finer granularity.
+
+It is possible to have different policies throughout the system, as the policy in question is represented by the 2nd and 3rd digit in the bigInt. This provides a maximum of 100 unique policies. The intervals representing delinquencies also have two digits to represent the amount. These can however easily extend past 100. To remedy this we save the percentage of total delinquencies instead, and save the total count separately. If one of the intervals contains 100\%, thus requiring 3 digits, the 1st digit of the bigInt is set to 1. So this particular example would result in the following bigInt;
 
 $$
 0\ 01\ 32\ 16\ 08\ 04\ 08\ 04\ 08\ 00 \eqno{(1)}
