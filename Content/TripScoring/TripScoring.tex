@@ -1,20 +1,20 @@
 \section{TRIP SCORING}\label{sec:trip}
 
-This section describes one of the biggest contribution of this paper, the evaluation of each trip. The final score of trip directly correlates with meters, meaning the client can get information on how many meters each of the metrics have cost him. The authors found this representation highly relatable as a representation of score.
+This section describes one of the biggest contribution of this paper, the evaluation of each trip. The final score of a trip directly correlates with meters, meaning the client can get information on how many meters each of the metrics have cost him. The authors found this representation highly relatable as a score representation.
 Because of this, the base score of any trip is the amount of meters driven, meaning you always as a customer, pay for the length of the trip. The metrics are described in section \ref{subsec:precon}.
-It is important emphasise that the entire calculation is possible based only on an entry in the \textit{Trip Fact} table. This means the insurance companies can make the calculation without any use of sensitive information and personal data.
+It is important emphasize that the entire calculation is possible, based only on an entry in the \textit{Trip Fact} table. This means the insurance companies can make the calculation without any use of sensitive information and personal data.
 
 \subsection{Subscores} 
 
-Subscores is a term for the scores of each individual metric. These scores are calculated individually and added to the base score. The metrics are divided into two different categories, metrics who are scored linearly and metrics who are scored polynomially. Being scored polynomially means that delinquencies are punished more and more severely as the amount increases.
+Subscores is a term for the scores of each individual metric. These scores are calculated individually and added to the base score. The metrics are divided into two different categories, metrics who are scored linearly and metrics who are scored polynomially. Being scored polynomially, means that delinquencies are punished more severely as the amount increases.
 
-Whether the score is calculated linearly or polynomial they share a calculation of an accumulated weight. The accumulated weight is a calculation dependant on the distribution of delinquencies and the weight of the intervals.
+Whether the score is calculated linearly or polynomial they share a calculation of an accumulated weight. The accumulated weight is a calculation dependent on the distribution of delinquencies and the weight of the intervals.
 
 $$
 \left( \frac { \sum _{ i }^{ n }{ \left( { interval }_{ i }*\quad { weight }_{ i } \right)  }  }{ 100 }  \right) \quad -\quad 1
 $$
 
-The equation calculates an accumulated weight by multiplying the percentage in each interval with the weight and dividing it with 100. This means the accumulated weight is calculated based on distribution as well. 1 is subtracted because the accumulated weight, at a later point in the calculation, is multiplied with metersdriven as the costs should correlate with the length of the trip. The calculation of accumulated weight for the example given in table \ref{tab:intervalexample} would be;
+The equation calculates an accumulated weight by multiplying the percentage in each interval with the weight and dividing it with 100. This means the accumulated weight is calculated based on distribution as well. 1 is subtracted because the accumulated weight, at a later point in the calculation, is multiplied with \textit{metersdriven} as the costs should correlate with the length of the trip. The calculation of accumulated weight for the example, regarding acceleration, given in table \ref{tab:intervalexample} would be;
 \begin{align*}
 (1.05\quad *\quad 40)\quad +\quad (1.1\quad *\quad 20)\quad +\quad \quad \\ 
   (1.15\quad *\quad 10)\quad +\quad (1.25\quad *\quad 5)\quad +\quad \quad \\
@@ -33,24 +33,24 @@ This leaves us with an accumulated weight of 0.18. This equation is important to
 \textbf{Linear Scoring} metrics are \textit{Critical Time Period} and \textit{RoadTypes}. They are considered linearly because of the fact that it is not possible for the driver to directly control the metric. The authors do not want to punish drivers for something they are not in control of. 
 The simplicity of a linear scoring model means that the equation is simply to multiply \textit{metersdriven} with the accumulated weight.
 
-\textbf{Polynomial Scoring} metrics are \textit{MetersSped}, \textit{Acceleration}, \textit{Jerks} and \textit{Brakes}. These metrics are controllable by the user at every given point in a trip. They are graded polynomially because continually committing these delinquencies are to be frowned upon. It is nearly impossible to drive a trip without having a couple of delinquencies therefore the first couple of delinquencies have less impact than the last. The insurance company has an option to define a polynomial equation for each delinquency.
+\textbf{Polynomial Scoring} metrics are \textit{MetersSped}, \textit{Acceleration}, \textit{Jerks} and \textit{Brakes}. These metrics are controllable by the user at every given point during a trip. They are graded polynomially because continually committing these delinquencies are to be frowned upon. It is nearly impossible to drive a trip without having a couple of delinquencies therefore the first couple of delinquencies have less impact than the last. The insurance company has an option to define a polynomial equation for each metric.
 
 \begin{align*}
 ax^{y} + bx + c\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \\
 where\quad x = AcummulatedWeight
 \end{align*}
 
-If we follow the previous example of acceleration and given the polynomial equation $1.25x^{1.08} +  1.12x + 0$, the calculation would be;
+If we follow the previous example of acceleration and given the policy-defined polynomial equation $1.25x^{1.08} +  1.12x + 0$, the calculation would be;
 
 \begin{align*}
 (1.25 * 0.18)^{1.08} +  1.12 * 0.18 + 0\quad \quad  =\ 0.40129
 \end{align*}
 
-The last step is multiplying the new value with the amount of delinquencies and some base price for each delinquency. In the example we will use a base price for an acceleration of 50 meters.
+This turned an accumulated weight of 0.18 into 0.40129. The last step is multiplying the new value with the amount of delinquencies, which in the running example is 80 accelerations, and some base price for each delinquency. In the example we will use a base price for an acceleration of 50 meters.
 
 \begin{align*}
 80 * 50 * 0.40129\quad \quad \quad \quad \quad \quad \quad \quad =\ 1605.16
 \end{align*}
 
 
-Given 80 accelerations, the intervals and insurance policy described in table \ref{tab:intervalexample}, the cost added from accelerations would be 1605.16 meters. Note that this is independent of the length on trip, so the insurance company might want to include \textit{metersdriven} for their polynomial setting.
+Given 80 accelerations, the intervals, and insurance policy described in table \ref{tab:intervalexample}, the cost added from accelerations would be 1605.16 meters. Note that this is independent of the length on trip, so the insurance company might want to include \textit{metersdriven} in their polynomial setting.
