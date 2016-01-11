@@ -111,9 +111,9 @@ The trips chosen for experiment 1 are visualized in Figure \ref{fig:shorttrips} 
     \label{fig:shorttrips}
 \end{figure}
 
-For naive usage-based-insurance, the car owners would be accountable for just the distance driven. Thus, the trips would cost approximately the same. With the authors developed advanced usage-based-insurance approach, it is demonstrated why this assessment of the cost is faulty.
+For naive usage-based-insurance, the car owners would be accountable for just the distance driven. Thus, the trips would cost approximately the same. With the developed advanced usage-based insurance approach, it is demonstrated why this assessment of the cost is faulty.
 
-Looking at the metrics from this test case (See Table  \ref{tab:shorttrips}), accelerations, brakes and jerks are very similar, both in count and distribution across intervals. The green trip has slightly higher counts, but the distributions reveal no clear winner across the categories. While the trips are driven on the same route, these metric-similarities are not guaranteed, but can possibly be attributed to it being the same driver driving both trips. The metric where the two trips really differentiate themselves from each other is Speeding. In spite of the similarities in the driving pattern, the car sped over three times more on green trip, compared to red trip. 3.24 kilometers of speeding on an 8.08 kilometer trip is significant, and should cost more than the 1.02 kilometers of speeding on red trip.
+Looking at the metrics from this test case (see table  \ref{tab:shorttrips}), accelerations, brakes, and jerks are very similar both in count, and distribution across intervals. The green trip has slightly higher counts, but the distributions in the interval reveal no clear winner across the metrics. While the trips are driven on the same route, these metric-similarities are not guaranteed, but can possibly be attributed to it being the same driver driving both trips. The metric where the two trips really differentiate themselves from each other is \textit{Speeding}. In spite of the similarities in the driving pattern, the car sped over three times more on green trip, compared to red trip. 3.24 kilometers of speeding on an 8.08 kilometer trip is significant, and should cost more than the 1.02 kilometers of speeding on red trip.
 
 The calculated tripscores for experiment 1 can be seen in table \ref{tab:shorttripscores}. The base score for both trips is identical to the distance driven denoted in meters. A slight difference can be seen on road-types, in spite of the routes being near identical. This can be attributed to very subtle deviations like the timing of each GPS point when roadtypes change or the success of the map-matching algorithm used. The biggest difference is as expected: Due to the excessive speeding the green trip is charged an additional 1564.05 meters, compared to red trip. Accelerations, brakes and jerks are also judged to be slightly worse, although the difference is more subtle. In the end green trip pays for over 12 kilometers, despite driving only $\sim$8.1 kilometers. Red trip is substantially less with 10.3 kilometers, but still some way from the possible 8478.08 meters that a careful driver might achieve, given that the influence of roadtypes are considered uncontrollable.
 
@@ -130,12 +130,12 @@ The calculated tripscores for experiment 1 can be seen in table \ref{tab:shorttr
     Jerk                & 213,27              & 158,06            \\ \hline
     \textbf{Total}      & \textbf{12106,72}   & \textbf{10324,60} \\ \hline
     \end{tabular}
-    \caption{Trip score distribution for test case 1}
+    \caption{Trip score distribution for experiment 1}
     \label{tab:shorttripscores}
 \end{table}
 
 \subsection{Experiment 2: Long trips} \label{subsec:expe2}
-The trips chosen for the experiment 2 can be seen in figure \ref{fig:longtrips}. These are longer and more complex trips between $\sim$31.7km and $\sim$32.0km in distance. These trips have more turns and are driven on a mix of roadtypes. The red and green are driven by the same driver, whereas the purple is from a different car.
+The trips chosen for experiment 2 can be seen in figure \ref{fig:longtrips}. These are longer and more complex trips between $\sim$31.7km and $\sim$32.0km in distance. These trips have more turns and are driven on a mix of roadtypes. The red and green are driven by the same driver, whereas the purple is from a different car.
 
 \begin{figure}[tb]
     \centering
@@ -144,14 +144,14 @@ The trips chosen for the experiment 2 can be seen in figure \ref{fig:longtrips}.
     \label{fig:longtrips}
 \end{figure}
 
-This test case is a three-way comparison and the routes are not exactly the same, although they share a majority of the same segments, as seen in figure \ref{fig:longtrips}. Looking at Table \ref{tab:longtrips}, the differences in metrics are very clear. Green trip is driven extremely well compared to the other two; low counts on accelerations, brakes and jerks, and intervals exclusively in the low end, and almost no speeding. Note that the total counts on this trip are about as low as the trips in test case 1 (See table \ref{tab:shorttrips}), despite being approximately 4 times as long.
+This test case is a three-way comparison and the routes are not exactly the same, although they share a majority of the same segments, as seen in figure \ref{fig:longtrips}. Looking at table \ref{tab:longtrips}, the differences in metrics are very clear. Green trip is driven extremely well compared to the other two; low counts on accelerations, brakes and jerks, and intervals exclusively in the low end, and almost no speeding. Note that the total counts on this trip are about as low as the trips in test case 1 (see table \ref{tab:shorttrips}), despite being approximately 4 times as long.
 Looking at red trip for comparison, we have a vast increase in all counts; More accelerations, brakes and jerks, and worse distribution of the intervals. A total of 31.76 kilometers driven, 13.06 kilometers of these were driven above the speed limit, mostly in the interval of 20-30\% above the speed limit.
 
 Note that despite of the massive differences in metrics, both of these trips were driven by the same car. Whether this indicates the driver being in a rush on green trip, or a different driver is difficult to predict with single examples - but the differences are clear.
 
-The purple trip is as mentioned driven by a different car. Looking at acceleration, brake and jerk counts along with the amount of speeding in table \ref{tab:longtrips}, the trip is clearly positioned between the other two trips. The matching intervals provides an extended view on these counts, indicating that this driver consistently makes rapid changes in speed. Both acceleration, brake and jerk intervals reached higher values than 11 on several occasions. The worst offender is the jerks distribution - 56\% of the jerks is positioned in the worst interval 11$m/s^3$ or above that. This is a striking contrast to the green and red trip, in which the worst case for this interval is 8\% on braking.
+The purple trip is as mentioned driven by a different car. Looking at acceleration, brake and jerk counts along with the amount of speeding in table \ref{tab:longtrips}, the trip is clearly positioned between the other two trips. The matching intervals provides an extended view on these counts, indicating that this driver consistently makes rapid changes in speed. Both acceleration, brake and jerk intervals reached higher values than 11 $m/s^2$ or $m/s^3$ on several occasions. The worst metric is the jerks distribution - 56\% of the jerks is positioned in the worst interval 11 $m/s^3$ or above that. This is a striking contrast to the green and red trip, in which the worst case for this interval is 8\% on braking.
 
-The aggregated scores seen in \ref{tab:longtripscores} are as expected given the driving patterns. Red trip is very expensive due to the excessive speeding, and the sheer amount of changes in speed. Green trip comes very close to the best possible score of 32764.82(base $+$ roadtype) for a route of 32043.83 meters. The extra cost from driving style adds up to only 825.57 meters(all metrics). Purple trip is charged extra for driving on a Tuesday morning where heavier traffic is expected. In spite of red trip having higher counts of accelerations brakes and jerks in total amounts, purple trip cost more on these points combined. This is due to the distributions which were significantly worse for the purple trip, meaning each delinquency has been significantly more severe.
+The aggregated scores seen in \ref{tab:longtripscores} are as expected given the driving patterns. Red trip is very expensive due to the excessive speeding, and the sheer amount of changes in speed. Green trip comes very close to the best possible score of 32764.82(base $+$ roadtype) for a route of 32043.83 meters. The extra cost from driving style adds up to only 825.57 meters(all metrics). Purple trip is charged extra for driving on a Tuesday morning where heavier traffic is expected. In spite of red trip having higher counts of accelerations, brakes, and jerks in total amounts, purple trip cost more on these points combined. This is due to the distributions which were significantly worse for the purple trip, meaning each delinquency has been significantly more severe.
 
 \begin{table}
     \centering
@@ -166,7 +166,7 @@ The aggregated scores seen in \ref{tab:longtripscores} are as expected given the
     Jerk                & 384,12              & 998,09            & 2857,83             \\ \hline
     \textbf{Total}      & \textbf{33590,39}   & \textbf{48355,73} & \textbf{40690,52}   \\ \hline
     \end{tabular}
-    \caption{Trip score distribution for test case 2}
+    \caption{Trip score distribution for experiment 2}
     \label{tab:longtripscores}
 \end{table}
 
@@ -189,7 +189,7 @@ The aggregated scores seen in \ref{tab:longtripscores} are as expected given the
     Brake intervals          & 0 0 48 20 18 10 5 0 & 0 0 50 24 16 11 0 0 \\
     Jerk intervals           & 0 0 60 20 13 7 0 0  & 0 0 71 14 14 0 0 0  \\
     \end{tabular}
-    \caption{Trip data for test case 1}
+    \caption{Trip data for experiment 1}
     \label{tab:shorttrips}
 \end{table*}
 
@@ -212,6 +212,6 @@ The aggregated scores seen in \ref{tab:longtripscores} are as expected given the
     Brake intervals         & 0 0 90 10 0 0 0 0    & 0 0 61 13 10 6 3 8  & 0 0 62 11 5 9 0 13 \\
     Jerk intervals          & 0 0 57 24 10 5 0 5   & 0 0 64 16 7 7 4 2   & 0 0 32 5 5 2 0 56  \\
     \end{tabular}
-    \caption{Trip data for test case 2}
+    \caption{Trip data for experiment 2}
     \label{tab:longtrips}
 \end{table*}
