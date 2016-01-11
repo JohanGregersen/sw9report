@@ -147,8 +147,6 @@ The trips chosen for experiment 2 can be seen in Figure \ref{fig:longtrips}. The
 This test case is a three-way comparison and the routes are not exactly the same, although they share a majority of the same segments, as seen in Figure \ref{fig:longtrips}. Looking at Table \ref{tab:longtrips}, the differences in metrics are very clear. Green trip is driven extremely well compared to the other two; low counts on accelerations, brakes and jerks, and intervals exclusively in the low end, and almost no speeding. Note that the total counts on this trip are about as low as the trips in test case 1 (see Table \ref{tab:shorttrips}), despite being approximately 4 times as long.
 Looking at red trip for comparison, we have a vast increase in all counts; More accelerations, brakes and jerks, and worse distribution of the intervals. A total of 31.76 kilometers driven, 13.06 kilometers of these were driven above the speed limit, mostly in the interval of 20-30\% above the speed limit.
 
-Note that despite of the massive differences in metrics, both of these trips were driven by the same car. Whether this indicates the driver being in a rush on green trip, or a different driver, is difficult to predict with single examples - but the differences are clear.
-
 \begin{table*}
     \centering
     \begin{tabular}{>{\bfseries}l|ll|}
@@ -194,6 +192,8 @@ Note that despite of the massive differences in metrics, both of these trips wer
     \caption{Trip data for experiment 2}
     \label{tab:longtrips}
 \end{table*}
+
+Note that despite of the massive differences in metrics, both of these trips were driven by the same car. Whether this indicates the driver being in a rush on green trip, or a different driver, is difficult to predict with single examples - but the differences are clear.
 
 The purple trip is as mentioned driven by a different car. Looking at acceleration, jerk, and brake counts along with the amount of speeding in Table \ref{tab:longtrips}, the trip is clearly positioned between the other two trips. The matching intervals provides an extended view on these counts, indicating that this driver consistently makes rapid changes in speed. Both acceleration, brake and jerk intervals reached higher values than 11 $m/s^2$ or $m/s^3$ on several occasions. The worst metric is the jerks distribution, 56\% of the jerks are positioned in the worst interval 11 $m/s^3$ or above that. This is a striking contrast to the green and red trip, in which the worst case for this interval is 8\% on braking.
 
