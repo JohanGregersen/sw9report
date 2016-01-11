@@ -99,10 +99,10 @@ To test this policy, and thereby the developed scoring system, trips were handpi
   \item Trips should display different driving styles
 \end{itemize}
 
-From these criteria, two different test cases were picked. The trips included in these cases are visualized in Figure \ref{fig:shorttrips} and \ref{fig:longtrips} with two and three trips respectively. The first being two short-distance trips, and second being three long-distance trips.
+From these criteria, two different experiments were picked. The trips included in these experiments are visualized in Figure \ref{fig:shorttrips} and \ref{fig:longtrips} with two and three trips respectively. The first being two short-distance trips, and second being three long-distance trips.
 
 \subsection{Experiment 1: Short trips} \label{subsec:expe1}
-The trips chosen for experiment 1 are visualized in Figure \ref{fig:shorttrips} and represents two $\sim$8.1km trips with a similar route. They are driven back and forth with the same car, on the same day. The route driven is simple and has very few turns. The trips are visualized using a green and red color.
+The trips chosen for experiment 1 are visualized in Figure \ref{fig:shorttrips} and represents two $\sim$8.1km trips with a similar route. They are driven back and forth with the same car, on the same day. The route is simple and has very few turns. The trips are visualized using a green and red color.
 
 \begin{figure}[tb]
     \centering
@@ -147,7 +147,7 @@ The trips chosen for experiment 2 can be seen in Figure \ref{fig:longtrips}. The
 This test case is a three-way comparison and the routes are not exactly the same, although they share a majority of the same segments, as seen in Figure \ref{fig:longtrips}. Looking at Table \ref{tab:longtrips}, the differences in metrics are very clear. Green trip is driven extremely well compared to the other two; low counts on accelerations, brakes and jerks, and intervals exclusively in the low end, and almost no speeding. Note that the total counts on this trip are about as low as the trips in test case 1 (see Table \ref{tab:shorttrips}), despite being approximately 4 times as long.
 Looking at red trip for comparison, we have a vast increase in all counts; More accelerations, brakes and jerks, and worse distribution of the intervals. A total of 31.76 kilometers driven, 13.06 kilometers of these were driven above the speed limit, mostly in the interval of 20-30\% above the speed limit.
 
-Note that despite of the massive differences in metrics, both of these trips were driven by the same car. Whether this indicates the driver being in a rush on green trip, or a different driver is difficult to predict with single examples - but the differences are clear.
+Note that despite of the massive differences in metrics, both of these trips were driven by the same car. Whether this indicates the driver being in a rush on green trip, or a different driver, is difficult to predict with single examples - but the differences are clear.
 
 \begin{table*}
     \centering
@@ -195,9 +195,9 @@ Note that despite of the massive differences in metrics, both of these trips wer
     \label{tab:longtrips}
 \end{table*}
 
-The purple trip is as mentioned driven by a different car. Looking at acceleration, brake and jerk counts along with the amount of speeding in Table \ref{tab:longtrips}, the trip is clearly positioned between the other two trips. The matching intervals provides an extended view on these counts, indicating that this driver consistently makes rapid changes in speed. Both acceleration, brake and jerk intervals reached higher values than 11 $m/s^2$ or $m/s^3$ on several occasions. The worst metric is the jerks distribution - 56\% of the jerks is positioned in the worst interval 11 $m/s^3$ or above that. This is a striking contrast to the green and red trip, in which the worst case for this interval is 8\% on braking.
+The purple trip is as mentioned driven by a different car. Looking at acceleration, jerk, and brake counts along with the amount of speeding in Table \ref{tab:longtrips}, the trip is clearly positioned between the other two trips. The matching intervals provides an extended view on these counts, indicating that this driver consistently makes rapid changes in speed. Both acceleration, brake and jerk intervals reached higher values than 11 $m/s^2$ or $m/s^3$ on several occasions. The worst metric is the jerks distribution, 56\% of the jerks are positioned in the worst interval 11 $m/s^3$ or above that. This is a striking contrast to the green and red trip, in which the worst case for this interval is 8\% on braking.
 
-The aggregated scores seen in \ref{tab:longtripscores} are as expected given the driving patterns. Red trip is very expensive due to the excessive speeding, and the sheer amount of changes in speed. Green trip comes very close to the best possible score of 32764.82(base $+$ roadtype) for a route of 32043.83 meters. The extra cost from driving style adds up to only 825.57 meters(all metrics). Purple trip is charged extra for driving on a Tuesday morning where heavier traffic is expected. In spite of red trip having higher counts of accelerations, brakes, and jerks in total amounts, purple trip cost more on these points combined. This is due to the distributions which were significantly worse for the purple trip, meaning each delinquency has been significantly more severe.
+The aggregated scores seen in Table \ref{tab:longtripscores} are as expected given the driving patterns. Red trip is very expensive due to the excessive speeding, and the sheer amount of changes in speed. Green trip comes very close to the best possible score of 32764.82(base $+$ roadtype) for a route of 32043.83 meters. The extra cost from driving style adds up to only 825.57 meters(all metrics). Purple trip is charged extra for driving on a Tuesday morning where heavier traffic is expected. In spite of red trip having higher counts of accelerations, jerks, and brakes in total amounts, purple trip cost more on these points combined. This is due to the distributions which were significantly worse for the purple trip, meaning each delinquency has been significantly more severe.
 
 \begin{table}
     \centering
